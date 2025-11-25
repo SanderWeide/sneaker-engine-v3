@@ -1,0 +1,53 @@
+# Angular LLM Context
+
+This file contains comprehensive Angular best practices and guidelines for AI-powered development.
+Source: https://angular.dev/assets/context/llms-full.txt
+
+For complete Angular documentation including:
+- Component architecture and styling
+- Dependency injection patterns
+- Routing and navigation
+- Forms (reactive and template-driven)
+- HTTP client usage
+- Testing strategies
+- Server-side rendering (SSR)
+- Signals and reactive programming
+- Internationalization
+- Performance optimization
+
+Refer to the full Angular documentation at https://angular.dev
+
+## Key Angular Principles
+
+### Component Architecture
+- Use standalone components (default in Angular v20+)
+- Do NOT set `standalone: true` in decorators
+- Use signals for state management
+- Use `input()` and `output()` functions instead of decorators
+- Use `computed()` for derived state
+- Set `changeDetection: ChangeDetectionStrategy.OnPush`
+- Use host object instead of `@HostBinding` and `@HostListener`
+
+### Templates
+- Use native control flow: `@if`, `@for`, `@switch` (not `*ngIf`, `*ngFor`, `*ngSwitch`)
+- Use `async` pipe for observables
+- Use class and style bindings (not `ngClass` or `ngStyle`)
+- No arrow functions in templates
+- No assumptions about browser globals in templates
+
+### Services & DI
+- Use `inject()` function instead of constructor injection
+- All services should be `providedIn: 'root'`
+- Design around single responsibility
+
+### TypeScript
+- Use strict type checking
+- Avoid `any`, use `unknown` when uncertain
+- Prefer type inference when obvious
+
+### Accessibility
+- Must pass AXE checks
+- Must follow WCAG AA standards
+- Include ARIA attributes where needed
+
+For full documentation, refer to: https://angular.dev/assets/context/llms-full.txt
