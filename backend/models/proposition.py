@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, String, Float, Text, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from database import Base
@@ -30,8 +30,8 @@ class Proposition(Base):
     offer_sneaker_id = Column(String, ForeignKey("sneakers.id"))
     status = Column(Enum(PropositionStatus), default=PropositionStatus.PENDING)
     message = Column(Text)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     # Relationships
     sneaker = relationship("Sneaker", foreign_keys=[sneaker_id], back_populates="propositions")

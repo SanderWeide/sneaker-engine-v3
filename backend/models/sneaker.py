@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, String, Float, Text, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from database import Base
@@ -26,9 +26,9 @@ class Sneaker(Base):
     description = Column(Text)
     image_url = Column(String)
     owner_id = Column(String, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     # Relationships
     owner = relationship("User", back_populates="sneakers")
-    propositions = relationship("Proposition", back_populates="sneaker", cascade="all, delete-orphan")
+    propositions = relationship("Proposition", foreign_keys="[Proposition.sneaker_id]", back_populates="sneaker", cascade="all, delete-orphan")
